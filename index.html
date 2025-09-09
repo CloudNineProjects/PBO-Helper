@@ -46,7 +46,6 @@
       padding: 6px;
       text-align: left;
     }
-    /* Loading screen */
     #loading-screen {
       display: flex;
       flex-direction: column;
@@ -58,8 +57,6 @@
     #app {
       display: none;
     }
-
-    /* Dark mode */
     .dark-mode {
       background: #121212;
       color: #f1f1f1;
@@ -86,19 +83,16 @@
   </style>
 </head>
 <body>
-  <!-- Dark Mode Toggle -->
   <header>
     <button id="darkModeToggle">🌙 Dark Mode</button>
   </header>
 
-  <!-- Loading Screen -->
   <div id="loading-screen">
     <img src="https://i.imgur.com/XZcfQzw.png" alt="Loading Logo" style="max-width:200px; margin-bottom:20px;">
     <button id="loadDataBtn">Load Data</button>
     <p id="loadingText"></p>
   </div>
 
-  <!-- Main App -->
   <div id="app">
     <div class="section highlight">
       <h2>Pokemon Finder</h2>
@@ -144,9 +138,7 @@
   </div>
 
   <script>
-    // --------------------
-    // DARK MODE
-    // --------------------
+    // Dark Mode
     const darkToggle = document.getElementById("darkModeToggle");
     darkToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
@@ -154,9 +146,7 @@
         ? "☀️ Light Mode" : "🌙 Dark Mode";
     });
 
-    // --------------------
-    // LOADING SCREEN
-    // --------------------
+    // Loading
     const loadBtn = document.getElementById("loadDataBtn");
     const loadText = document.getElementById("loadingText");
     const loadingScreen = document.getElementById("loading-screen");
@@ -170,57 +160,39 @@
       app.style.display = "block";
     });
 
-    // --------------------
-    // DATA SOURCES
-    // --------------------
+    // Sheets
     const spawnSheets = {
-      "Sinnoh": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?output=csv",
-      "Jvaloh": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=961851118&output=csv",
-      "Hoenn": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=934360191&output=csv",
-      "Kanto": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=953981212&output=csv",
-      "Event": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=1147933137&output=csv",
-      "Crew Wars Island": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=2040577443&output=csv"
+      "Sinnoh": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=0&single=true&output=csv",
+      "Jvaloh": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=1888700837&single=true&output=csv",
+      "Hoenn": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=1008140095&single=true&output=csv",
+      "Kanto": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=963744340&single=true&output=csv",
+      "Event": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=867555265&single=true&output=csv",
+      "Crew Wars Island": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS3eHdgBkA2DHukT5irO5O38RuYUZ3BDYfM0TCz9LATz0URiiKCSkyKtNFbfQkKR2pEzLbCeMh7saZe/pub?gid=277236296&single=true&output=csv"
     };
 
     const chestSheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9NXQeF7_DUFs-GSpxYU5QsufA6Vtwi_n5O6ytErPYQAssIC4zen99a23uPvYQXzjARPvF0XbXIiOn/pub?output=csv";
-
-    const megaSheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR_JYMoBaB85e1OwF6k2M6VjYflIF1A2bVRrXGvlCewxtM9AnpB4oYmMcja3r86emLUR1kzGw5Q9m4y/pub?output=csv";
-
-    const pvpSheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRFVtU6sT8CPqOfyxCydKnN6AE98OhtA2XBCsmRbw70yZvLd4t6xGcU8-G9f5k6j6nlMOM8piwGXG78/pub?output=csv";
+    const megaSheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT8oRNGXyajLEDTw_z2AYgO5ls7TD9khstdBS2RL6PD9CwB06GKGM9dl2SerCRtSjSf5Y-8lo4sZ7UP/pub?output=csv";
+    const pvpSheet = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSp2K2rlJkpsFvuUWBjjiO-qpoJnfAx2vXJATqJYpK8fwmxuYBvKPihKvnPKChSt276QRjLkMlUTMgz/pub?output=csv";
 
     let spawnData = {};
     let chestData = [];
     let megaData = [];
     let pvpData = [];
 
-    // --------------------
-    // CSV HELPER
-    // --------------------
     async function fetchCSV(url) {
       const res = await fetch(url);
       const text = await res.text();
       return text.split("\n").map(r => r.split(",").map(c => c.trim()));
     }
 
-    // --------------------
-    // LOADDATA
-    // --------------------
     async function loadData() {
-      // Spawn sheets
       for (let [region, url] of Object.entries(spawnSheets)) {
         spawnData[region] = await fetchCSV(url);
       }
-
-      // Chest
       chestData = await fetchCSV(chestSheet);
-
-      // Mega
       megaData = await fetchCSV(megaSheet);
-
-      // PvP
       pvpData = await fetchCSV(pvpSheet);
 
-      // Fill dropdowns
       const regionSelect = document.getElementById("regionSelect");
       Object.keys(spawnSheets).forEach(region => {
         const opt = document.createElement("option");
@@ -246,9 +218,6 @@
       });
     }
 
-    // --------------------
-    // HELPER: RENDER TABLE
-    // --------------------
     function renderTable(headers, rows) {
       if (!rows.length) return "<p>No results found.</p>";
       let html = "<table><thead><tr>";
@@ -261,15 +230,12 @@
       return html;
     }
 
-    // --------------------
-    // POKEMON FINDER
-    // --------------------
+    // Pokemon Finder
     document.getElementById("pokemonSearchBtn").addEventListener("click", () => {
       const query = document.getElementById("pokemonInput").value.trim().toLowerCase();
       const optimized = document.getElementById("optimizedHunt").checked;
       let results = [];
 
-      // Search spawn sheets
       for (let [region, data] of Object.entries(spawnData)) {
         const headers = data[0];
         const rows = data.slice(1).filter(r => r[2] && r[2].toLowerCase() === query);
@@ -293,7 +259,7 @@
         }
       }
 
-      // Search chests
+      // Chest sheet
       const chestRows = chestData.slice(1).filter(r => r[2] && r[2].toLowerCase() === query);
       if (chestRows.length) {
         results.push({ region: "Chests", headers: chestData[0], rows: chestRows });
@@ -310,9 +276,7 @@
       document.getElementById("pokemonResults").innerHTML = "";
     });
 
-    // --------------------
-    // SPAWN CHECK
-    // --------------------
+    // Spawn Check
     document.getElementById("regionSelect").addEventListener("change", e => {
       const region = e.target.value;
       const locationSelect = document.getElementById("locationSelect");
@@ -352,9 +316,7 @@
       document.getElementById("spawnResults").innerHTML = "";
     });
 
-    // --------------------
-    // CHEST FINDER
-    // --------------------
+    // Chest Finder
     document.getElementById("chestSearchBtn").addEventListener("click", () => {
       const type = document.getElementById("chestSelect").value;
       const container = document.getElementById("chestResults");
@@ -372,9 +334,7 @@
       document.getElementById("chestResults").innerHTML = "";
     });
 
-    // --------------------
-    // MEGA STONE CHECK
-    // --------------------
+    // Mega Stone
     document.getElementById("megaSearchBtn").addEventListener("click", () => {
       const stone = document.getElementById("megaSelect").value;
       const container = document.getElementById("megaResults");
@@ -392,9 +352,7 @@
       document.getElementById("megaResults").innerHTML = "";
     });
 
-    // --------------------
-    // PVP CHECK
-    // --------------------
+    // PvP Check
     document.getElementById("pvpSearchBtn").addEventListener("click", () => {
       const query = document.getElementById("pvpInput").value.trim().toLowerCase();
       const headers = pvpData[0];
@@ -407,7 +365,6 @@
       document.getElementById("pvpInput").value = "";
       document.getElementById("pvpResults").innerHTML = "";
     });
-
   </script>
 </body>
 </html>
